@@ -1,7 +1,8 @@
 const question = document.getElementById("question");
 /*const choice = document.getElementsByClassName("choice-text");*/
 const choices = Array.from(document.getElementsByClassName("choice-text"));
-
+const questionCounterText = document.getElementById('questionCounter');
+const scoreText = document.getElementById('score');
 let currentQuestion = {};
 let acceptingAnswers = true;
 let score = 0;
@@ -57,6 +58,9 @@ getNewQuestion = ()=>{
         return window.location.assign("/end.html");
     }
     questionCounter++;
+    //questionCounterText.innerText = questionCounter + "/" + MAX_QUESTIONS;
+    questionCounterText.innerText = '${questionCounter}/${MAX_QUESTIONS};
+    // line 61 nd 62 has same effet it's just 2 way to write
     const questionIndex = Math.floor(Math.random()*availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
@@ -84,6 +88,11 @@ choices.forEach(choice =>{
 
         const classToApply = 
         selectedAnswer == currentQuestion.answer ? 'correct' : 'incorrect';
+        
+        if(classToApply == 'correct'){
+            incrementScore(CORRECT_BONUS);
+        }
+        
         selectedChoice.parentElement.classList.add(classToApply);
 
         setTimeout(()=>{ 
@@ -97,6 +106,10 @@ choices.forEach(choice =>{
 
 });
 
+incrementScore = num=>{
+    score+=num;
+    scoreText.innerText=score;
+};
 startGame();
 
 

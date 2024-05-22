@@ -7,9 +7,26 @@
     <link rel="stylesheet" href="app.css" />
     <link rel="stylesheet" href="game.css" />
 </head>
+
 <body>
-    <div class="container">
+<div class="container">
         <div id="game" class="justify-center flex-column">
+            <div id="hud">
+                <div id="hud-item">
+                    <p class="hud-prefix">
+                        question
+                    </p>
+                    <h1 class="hud-main-text" id="questionCounter"</h1>                    </h1>
+                </div>
+                <div id="hud-item">
+                    <p class="hud-prefix">
+                        Score
+                    </p>
+                    <h1 class="hud-main-text" id="Score">
+                        0
+                    </h1>
+                </div>
+            </div>
             <h2 id = "question">What is the answer to this question?</h2>
             <div class="choice-container">
                 <p class="choice-prefix">A</p>
