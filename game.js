@@ -1,8 +1,10 @@
 const question = document.getElementById("question");
 /*const choice = document.getElementsByClassName("choice-text");*/
 const choices = Array.from(document.getElementsByClassName("choice-text"));
-const questionCounterText = document.getElementById('questionCounter');
+const progressText = document.getElementById('progressText');
 const scoreText = document.getElementById('score');
+const progressBarFull = document.getElementById("progressBarFull");
+
 let currentQuestion = {};
 let acceptingAnswers = true;
 let score = 0;
@@ -55,12 +57,17 @@ startGame = ()=>{
 
 getNewQuestion = ()=>{
     if(availableQuestions.length==0|| questionCounter>= MAX_QUESTIONS){
+        localStorage.setItem('mostRecentScore', score);
         return window.location.assign("/end.html");
     }
     questionCounter++;
     //questionCounterText.innerText = questionCounter + "/" + MAX_QUESTIONS;
-    questionCounterText.innerText = '${questionCounter}/${MAX_QUESTIONS};
+    progressText.innerText = 'question ${questionCounter}/${MAX_QUESTIONS}';
     // line 61 nd 62 has same effet it's just 2 way to write
+    
+    //update the progress bar
+    progressBarFull.style.width = '${(questionCounter/MAX_QUESTIONS)*100}%';
+    
     const questionIndex = Math.floor(Math.random()*availableQuestions.length);
     currentQuestion = availableQuestions[questionIndex];
     question.innerText = currentQuestion.question;
